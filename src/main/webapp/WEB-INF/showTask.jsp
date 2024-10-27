@@ -1,40 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="entities.Task" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>To-Do List</title>
+    <title>Task List</title>
 </head>
 <body>
-<h1>To-Do List</h1>
+<h1>Task List</h1>
+
+<form action="${pageContext.request.contextPath}/deleteTask" method="post">
+
 <table border="1">
     <tr>
         <th>Task ID</th>
-        <th>User ID</th>
         <th>Title</th>
         <th>Description</th>
         <th>Status</th>
         <th>Due Date</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
-    <%
-        List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-        for (Task task : tasks) {
-    %>
-    <tr>
-        <td><%= task.getTaskId() %></td>
-        <td><%= task.getUser().getUserId() %></td>
-        <td><%= task.getTitle() %></td>
-        <td><%= task.getDescription() %></td>
-        <td><%= task.getStatus() %></td>
-        <td><%= task.getDueDate() %></td>
-        <td><a href="deleteTask?taskId=<%= task.getTaskId() %>">Delete</a></td>
-    </tr>
-    <%
-        }
-    %>
+
+    <c:forEach var="task" items="${taskList}">
+        <tr>
+            <td>${task.taskId}</td>
+            <td>${task.title}</td>
+            <td>${task.description}</td>
+            <td>${task.status}</td>
+            <td>${task.dueDate}</td>
+            <td><a href="deleteTask?taskId=${task.taskId}">Delete</a></td>
+        </tr>
+    </c:forEach>
 </table>
-<a href="addTask.jsp">Add New Task</a>
+
+<br>
+<a href="addTask">Add a new task</a>
 </body>
 </html>

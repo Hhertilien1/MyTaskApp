@@ -58,6 +58,14 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>jakarta-repo</id>
+            <url>https://repo.jakarta.ee/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+
     <build>
         <plugins>
             <plugin>
